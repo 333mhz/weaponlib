@@ -1,10 +1,13 @@
 buildscript {
     repositories {
-        jcenter()
-        maven { url = "http://files.minecraftforge.net/maven" }
+        // mavenCentral is currently not needed but could be useful in the future if we decide for example to use Jafama
+        // mavenCentral()
+        maven { 
+            url 'https://maven.minecraftforge.net' 
+        }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath 'com.anatawa12.forge:ForgeGradle:2.3-1.0.7'
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
@@ -12,8 +15,8 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 
 version = "1.0"
-group = "com.yourname.modid" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "modid"
+group = "com.vicmatskiv.weaponlib" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "weaponlib"
 
 sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 compileJava {
@@ -73,5 +76,15 @@ processResources {
     // copy everything else except the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
+    }
+
+    from ('src/main/java') {
+        include '**/*.png'
+        
+        include '**/*.json'
+        
+        include '**/*.vsh'
+        
+        include '**/*.fsh'
     }
 }
